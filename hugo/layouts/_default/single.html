@@ -1,0 +1,57 @@
+{{ define "main" }}
+
+{{ if eq .Section "blog" }}
+<!-- ─── Blog Post ────────────────────── -->
+<header class="post-header">
+  <div class="container">
+    <div class="post-header-inner">
+      <a href="/blog/" class="post-back">← Retour au blog</a>
+      {{ with .Params.categories }}
+      <span class="article-category">{{ index . 0 }}</span>
+      {{ end }}
+      <h1 class="post-title">{{ .Title }}</h1>
+      <div class="post-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ .Date.Format "2 January 2006" }}
+        </time>
+        {{ $wc := countwords .Content }}
+        {{ if gt $wc 0 }}
+        <span class="dot"></span>
+        {{ $min := div $wc 200 }}{{ if lt $min 1 }}{{ $min = 1 }}{{ end }}
+        <span>{{ $min }} min de lecture</span>
+        {{ end }}
+        {{ with .Params.tags }}
+        <span class="dot"></span>
+        <span>{{ delimit . " · " }}</span>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="post-body">
+  <div class="container">
+    <div class="post-content">
+      {{ .Content }}
+    </div>
+  </div>
+</section>
+
+{{ else }}
+<!-- ─── Generic Page ─────────────────── -->
+<div class="simple-page">
+  <div class="container">
+    <div class="simple-content">
+      <div class="simple-page-header">
+        <h1>{{ .Title }}</h1>
+        {{ if not .Date.IsZero }}
+        <span class="page-date">Mise à jour le {{ .Date.Format "2 January 2006" }}</span>
+        {{ end }}
+      </div>
+      {{ .Content }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ end }}

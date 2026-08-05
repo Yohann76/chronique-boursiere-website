@@ -18,6 +18,16 @@
 
 ---
 
+## 0. Usage
+
+Website available at → **http://51.178.80.14:1313**
+
+```bash
+make dev-build   # Build Docker images
+make dev-run     # Start the site (http://51.178.80.14:1313)
+make dev-kill    # Stop all containers
+```
+
 ## 1. Project Overview
 
 **Website:** chroniqueboursiere.fr  

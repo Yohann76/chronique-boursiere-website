@@ -1,0 +1,61 @@
+{{ define "main" }}
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <span class="page-hero-tag">{{ if .IsSection }}Blog{{ else }}{{ .Title }}{{ end }}</span>
+      <h1>{{ if .IsSection }}Le Blog{{ else }}{{ .Title }}{{ end }}</h1>
+      <p class="page-hero-desc">
+        {{ if .IsSection }}
+        Analyses, décryptages et actualités économiques. Classés, sourcés, accessibles.
+        {{ else }}
+        {{ .Params.description | default "" }}
+        {{ end }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<section class="blog-layout">
+  <div class="container">
+
+    <div class="blog-filters">
+      <button class="filter-btn active">Tous</button>
+      <button class="filter-btn">Résultats financiers</button>
+      <button class="filter-btn">Actualité</button>
+      <button class="filter-btn">CAC40</button>
+      <button class="filter-btn">Politique</button>
+      <button class="filter-btn">Finance</button>
+    </div>
+
+    {{ if .Pages }}
+    <div class="blog-list">
+      {{ range $index, $page := .Pages }}
+      <a href="{{ .RelPermalink }}" class="blog-list-item">
+        <span class="blog-list-number">{{ printf "%02d" (add $index 1) }}</span>
+        <div class="blog-list-content">
+          {{ with .Params.categories }}
+          <span class="article-category">{{ index . 0 }}</span>
+          {{ end }}
+          <h2 class="blog-list-title">{{ .Title }}</h2>
+          <p class="blog-list-excerpt">{{ .Summary | truncate 160 "…" }}</p>
+        </div>
+        <div class="blog-list-date">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format "2 Jan 2006" }}
+          </time>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+
+    {{ template "_internal/pagination.html" . }}
+
+    {{ else }}
+    <p style="color:var(--text-muted); padding: 3rem 0;">Aucun article pour le moment. Revenez bientôt.</p>
+    {{ end }}
+
+  </div>
+</section>
+
+{{ end }}

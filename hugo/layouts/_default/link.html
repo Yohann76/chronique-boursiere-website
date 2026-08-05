@@ -1,0 +1,40 @@
+{{ define "main" }}
+
+<div class="link-page">
+  <div class="link-page-inner">
+    <div class="link-avatar">CB</div>
+    <h1 class="link-brand">Chronique <em>Boursière</em></h1>
+    <p class="link-tagline">Média indépendant — Économie &amp; Actualité des entreprises</p>
+
+    <div class="link-list">
+      {{ .Content }}
+
+      <a href="/blog/" class="link-item">
+        <span class="link-item-icon">📰</span>
+        Le Blog — Toutes nos analyses
+      </a>
+      <a href="#" class="link-item" target="_blank" rel="noopener">
+        <span class="link-item-icon">▶</span>
+        YouTube — Chronique Boursière
+      </a>
+      <a href="#" class="link-item" target="_blank" rel="noopener">
+        <span class="link-item-icon">✕</span>
+        X (Twitter) — @ChroniqueBours
+      </a>
+      <a href="#" class="link-item" target="_blank" rel="noopener">
+        <span class="link-item-icon">◈</span>
+        Instagram — @chroniqueboursiere
+      </a>
+      <a href="#" class="link-item" target="_blank" rel="noopener">
+        <span class="link-item-icon">♪</span>
+        TikTok — @chroniqueboursiere
+      </a>
+      <a href="#" class="link-item" target="_blank" rel="noopener">
+        <span class="link-item-icon">➤</span>
+        Telegram — Canal officiel
+      </a>
+    </div>
+  </div>
+</div>
+
+{{ end }}

@@ -1,0 +1,19 @@
+<article class="article-card">
+  {{ with .Params.categories }}
+  <span class="article-category">{{ index . 0 }}</span>
+  {{ end }}
+  <h3 class="article-title">
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  </h3>
+  <p class="article-excerpt">{{ .Summary }}</p>
+  <div class="article-meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">
+      {{ .Date.Format "2 Jan 2006" }}
+    </time>
+    {{ $wc := countwords .Content }}
+    {{ if gt $wc 0 }}
+    <span class="dot"></span>
+    <span>{{ div $wc 200 | printf "%d" }}{{ if lt (div $wc 200) 1 }}1{{ end }} min de lecture</span>
+    {{ end }}
+  </div>
+</article>

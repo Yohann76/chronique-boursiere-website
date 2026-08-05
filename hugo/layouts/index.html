@@ -1,0 +1,200 @@
+{{ define "main" }}
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-tag">Média économique &amp; financier</span>
+      <h1>Comprendre <em>l'économie</em><br>qui nous entoure</h1>
+      <p class="hero-description">
+        Chronique Boursière est un média indépendant spécialisé en économie et actualité des entreprises.
+        Résultats financiers, analyse des marchés, actualité corporate — décryptés clairement.
+      </p>
+      <div class="hero-actions">
+        <a href="/blog/" class="btn btn-primary">Lire le blog</a>
+        <a href="/qui-sommes-nous/" class="btn btn-outline">Qui sommes-nous</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">CAC40</div>
+          <div class="stat-label">Entreprises suivies</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Catégories d'analyse</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Indépendant</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     DERNIERS ARTICLES
+═══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Dernières publications</span>
+      <h2 class="section-title">Actualités récentes</h2>
+      <p class="section-subtitle">Analyses et décryptages de l'économie française et mondiale.</p>
+    </div>
+
+    <div class="articles-grid">
+      {{ $posts := where .Site.RegularPages "Section" "blog" }}
+      {{ range first 3 $posts }}
+        {{ partial "article-card.html" . }}
+      {{ else }}
+      <p style="color:var(--text-muted); grid-column:1/-1;">Les premiers articles arrivent bientôt.</p>
+      {{ end }}
+    </div>
+
+    {{ if gt (len (where .Site.RegularPages "Section" "blog")) 3 }}
+    <div class="view-all-wrap">
+      <a href="/blog/" class="link-arrow">Voir tous les articles →</a>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CATÉGORIES
+═══════════════════════════════════════════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Explorer</span>
+      <h2 class="section-title">Nos catégories</h2>
+      <p class="section-subtitle">Du suivi des grandes entreprises à l'analyse macroéconomique.</p>
+    </div>
+
+    <div class="categories-grid">
+      <a href="/categories/resultats-financiers/" class="category-card">
+        <div class="category-icon">📊</div>
+        <div class="category-name">Résultats financiers</div>
+        <div class="category-count">Trimestriels &amp; annuels</div>
+      </a>
+      <a href="/categories/actualite/" class="category-card">
+        <div class="category-icon">📰</div>
+        <div class="category-name">Actualité</div>
+        <div class="category-count">Dernières nouvelles</div>
+      </a>
+      <a href="/categories/cac40/" class="category-card">
+        <div class="category-icon">📈</div>
+        <div class="category-name">CAC40</div>
+        <div class="category-count">Entreprises phares</div>
+      </a>
+      <a href="/categories/politique/" class="category-card">
+        <div class="category-icon">🏛️</div>
+        <div class="category-name">Politique</div>
+        <div class="category-count">Décisions économiques</div>
+      </a>
+      <a href="/categories/finance/" class="category-card">
+        <div class="category-icon">💹</div>
+        <div class="category-name">Finance</div>
+        <div class="category-count">Marchés &amp; analyses</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MISSION / ABOUT
+═══════════════════════════════════════════ -->
+<section class="about-section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-content">
+        <span class="about-label">Notre mission</span>
+        <h2 class="about-title">Rendre l'économie accessible à tous</h2>
+        <p class="about-text">
+          Dans un monde de plus en plus complexe, comprendre les mécanismes économiques est devenu essentiel.
+          Chronique Boursière décrypte l'actualité des entreprises, les résultats financiers et les tendances
+          de marché avec un langage clair et accessible.
+        </p>
+        <div class="about-features">
+          <div class="about-feature">
+            <span class="feature-dot"></span>
+            <span class="feature-text">Suivi des résultats financiers trimestriels des grandes entreprises françaises et mondiales</span>
+          </div>
+          <div class="about-feature">
+            <span class="feature-dot"></span>
+            <span class="feature-text">Analyse indépendante des tendances économiques et des marchés financiers</span>
+          </div>
+          <div class="about-feature">
+            <span class="feature-dot"></span>
+            <span class="feature-text">Décryptage des décisions politiques et de leur impact sur l'économie réelle</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-visual">
+        <div class="ticker-card">
+          <div class="ticker-info">
+            <span class="ticker-name">LVMH</span>
+            <span class="ticker-full">Moët Hennessy Louis Vuitton</span>
+          </div>
+          <div class="ticker-value">
+            <div class="ticker-price">625,80 €</div>
+            <div class="ticker-change up">▲ +1,24%</div>
+          </div>
+        </div>
+        <div class="ticker-card">
+          <div class="ticker-info">
+            <span class="ticker-name">TTE</span>
+            <span class="ticker-full">TotalEnergies SE</span>
+          </div>
+          <div class="ticker-value">
+            <div class="ticker-price">58,42 €</div>
+            <div class="ticker-change down">▼ -0,38%</div>
+          </div>
+        </div>
+        <div class="ticker-card">
+          <div class="ticker-info">
+            <span class="ticker-name">BNP</span>
+            <span class="ticker-full">BNP Paribas SA</span>
+          </div>
+          <div class="ticker-value">
+            <div class="ticker-price">72,16 €</div>
+            <div class="ticker-change up">▲ +0,87%</div>
+          </div>
+        </div>
+        <div class="ticker-card">
+          <div class="ticker-info">
+            <span class="ticker-name">AIR</span>
+            <span class="ticker-full">Airbus SE</span>
+          </div>
+          <div class="ticker-value">
+            <div class="ticker-price">168,94 €</div>
+            <div class="ticker-change up">▲ +2,15%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     NEWSLETTER
+═══════════════════════════════════════════ -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner">
+      <span class="section-tag">Newsletter</span>
+      <h2 class="newsletter-title">Restez informé</h2>
+      <p class="newsletter-text">Recevez nos analyses et décryptages économiques directement dans votre boîte mail. Aucun spam, désabonnement en un clic.</p>
+      <form class="newsletter-form" novalidate>
+        <input type="email" placeholder="votre@email.fr" aria-label="Adresse e-mail">
+        <button type="submit" class="btn btn-primary">S'abonner</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{{ end }}

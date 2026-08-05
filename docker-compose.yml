@@ -1,0 +1,10 @@
+services:
+  hugo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "1313:1313"
+    volumes:
+      - ./hugo:/site
+    command: hugo server --bind 0.0.0.0 --disableFastRender --poll 700ms
