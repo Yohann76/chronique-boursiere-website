@@ -1,31 +1,31 @@
-# Chronique Boursière — Cahier des Charges
+# Chronique Boursière — Project Specification
 
-> Référentiel de spécification du projet **chroniqueboursiere.fr**
+> Reference specification document for **chroniqueboursiere.fr**
 
 ---
 
-## Sommaire
+## Table of Contents
 
-1. [Présentation du projet](#1-présentation-du-projet)
-2. [Plan d'implémentation](#2-plan-dimplémentation)
-3. [Architecture technique](#3-architecture-technique)
-4. [Design & Charte graphique](#4-design--charte-graphique)
-5. [Pages & Structure du site](#5-pages--structure-du-site)
+1. [Project Overview](#1-project-overview)
+2. [Implementation Plan](#2-implementation-plan)
+3. [Technical Architecture](#3-technical-architecture)
+4. [Design & Visual Identity](#4-design--visual-identity)
+5. [Pages & Site Structure](#5-pages--site-structure)
 6. [Blog](#6-blog)
 7. [Back-office](#7-back-office)
-8. [Automatisations](#8-automatisations)
+8. [Automations](#8-automations)
 9. [SEO](#9-seo)
 
 ---
 
-## 1. Présentation du projet
+## 1. Project Overview
 
-**Site :** chroniqueboursiere.fr  
-**Type :** Média en ligne spécialisé en économie et actualité des entreprises
+**Website:** chroniqueboursiere.fr  
+**Type:** Online media specializing in economics and corporate news
 
-Chronique Boursière est un média dont l'objectif est de renseigner et d'aider les gens à comprendre le monde économique qui les entoure. Spécialiste de l'économie et de l'actualité des entreprises (CAC40, résultats financiers, politique économique, marchés).
+Chronique Boursière is a media outlet whose goal is to inform and help people understand the economic world around them. Specializing in economics and corporate news (CAC40, financial results, economic policy, markets).
 
-**Réseaux sociaux :**
+**Social Media:**
 - YouTube
 - X (Twitter)
 - Instagram
@@ -34,208 +34,208 @@ Chronique Boursière est un média dont l'objectif est de renseigner et d'aider 
 
 ---
 
-## 2. Plan d'implémentation
+## 2. Implementation Plan
 
-| Étape | Description |
-|-------|-------------|
-| **Étape 1** | Mise en place de l'infrastructure : Docker, Docker Compose, Makefile, Hugo |
-| **Étape 2** | Architecture du site : menu, footer, design principal de la homepage |
-| **Étape 3** | Mise en place du blog avec optimisation SEO complète |
-| **Étape 4** | Développement du back-office (authentification admin) |
-| **Étape 5** | Automatisations du back-office (news, publications, données financières) |
+| Step | Description |
+|------|-------------|
+| **Step 1** | Infrastructure setup: Docker, Docker Compose, Makefile, Hugo |
+| **Step 2** | Site architecture: menu, footer, main homepage design |
+| **Step 3** | Blog setup with full SEO optimization |
+| **Step 4** | Back-office development (admin authentication) |
+| **Step 5** | Back-office automations (news, publications, financial data) |
 
 ---
 
-## 3. Architecture technique
+## 3. Technical Architecture
 
 ### Stack
 
-| Composant | Technologie |
-|-----------|-------------|
-| Générateur de site statique | Hugo (Go) |
-| Base de données | PostgreSQL |
-| Conteneurisation | Docker + Docker Compose |
-| Automatisation des builds | Makefile |
+| Component | Technology |
+|-----------|------------|
+| Static site generator | Hugo (Go) |
+| Database | PostgreSQL |
+| Containerization | Docker + Docker Compose |
+| Build automation | Makefile |
 
-### Commandes Makefile
+### Makefile Commands
 
 ```bash
-make dev-run      # Lance l'environnement de développement
-make dev-build    # Build les images Docker
-make dev-kill     # Arrête et supprime les conteneurs
+make dev-run      # Start the development environment
+make dev-build    # Build Docker images
+make dev-kill     # Stop and remove containers
 ```
 
 ### Docker Compose
 
-Le projet tourne entièrement via Docker Compose :
-- Service `hugo` : génération et serving du site statique
-- Service `postgres` : base de données pour le back-office
-- Service `backoffice` : API et interface d'administration
+The project runs entirely via Docker Compose:
+- `hugo` service: static site generation and serving
+- `postgres` service: database for the back-office
+- `backoffice` service: admin API and interface
 
-### Articles Hugo
+### Hugo Articles
 
-Les articles du blog sont des fichiers `.md` dans le dépôt de code.  
-Publier un article = ajouter un fichier `.md` dans le répertoire `content/blog/`.  
-Par défaut, tous les articles créés sont en **brouillon** (`draft: true`) — ils ne sont visibles qu'après validation manuelle.
-
----
-
-## 4. Design & Charte graphique
-
-### Palette de couleurs
-
-| Rôle | Couleur | Hex |
-|------|---------|-----|
-| Couleur principale | Bleu foncé | `#233b63` |
-| Couleur secondaire | Orange grisé | `#af9b7e` |
-| Fond / texte clair | Blanc | `#ffffff` |
-
-### Typographie
-
-- Police lisible, représentant l'actualité et le sérieux journalistique
-- Style général : **moderne, luxueux, épuré**
-- L'espace blanc est valorisé — le design doit "respirer"
-
-### Esprit visuel
-
-- Moderne et premium
-- Simplicité et lisibilité avant tout
-- Proximité avec les codes visuels des médias financiers haut de gamme
+Blog articles are `.md` files stored in the code repository.  
+Publishing an article = adding a `.md` file to the `content/blog/` directory.  
+By default, all created articles are **drafts** (`draft: true`) — they are only visible after manual validation.
 
 ---
 
-## 5. Pages & Structure du site
+## 4. Design & Visual Identity
+
+### Color Palette
+
+| Role | Color | Hex |
+|------|-------|-----|
+| Primary color | Dark blue | `#233b63` |
+| Secondary color | Greyish orange | `#af9b7e` |
+| Background / light text | White | `#ffffff` |
+
+### Typography
+
+- Readable typeface representing news and journalistic seriousness
+- Overall style: **modern, luxurious, clean**
+- White space is valued — the design must "breathe"
+
+### Visual Spirit
+
+- Modern and premium
+- Simplicity and readability above all
+- Close to the visual codes of high-end financial media
+
+---
+
+## 5. Pages & Site Structure
 
 ### Pages
 
 | Route | Description |
 |-------|-------------|
-| `/` | Homepage — présentation du média |
-| `/blog` | Liste des articles du blog |
-| `/blog/{titre-article}` | Page article unique |
-| `/mentions-legales` | Mentions légales |
-| `/politique-de-confidentialite` | Politique de confidentialité |
-| `/link` | Page de liens (type Linktree) — centralise tous les liens réseaux sociaux et ressources |
+| `/` | Homepage — media presentation |
+| `/blog` | Blog article listing |
+| `/blog/{article-title}` | Single article page |
+| `/legal-notice` | Legal notice |
+| `/privacy-policy` | Privacy policy |
+| `/link` | Links page (Linktree-style) — centralizes all social media and resource links |
 
 ### Menu (header)
 
-Navigation principale en haut de page :
-- Accueil
+Main navigation at the top of the page:
+- Home
 - Blog
-- Qui sommes-nous
+- Who we are
 - Pages
 
 ### Footer
 
-- Logo et liens vers les réseaux sociaux : YouTube, X, Instagram, TikTok, Telegram
-- Liens légaux : Mentions légales, Politique de confidentialité
+- Logo and links to social media: YouTube, X, Instagram, TikTok, Telegram
+- Legal links: Legal notice, Privacy policy
 
 ### Homepage (`/`)
 
-Page d'introduction au média :
-- Présentation de Chronique Boursière : mission, positionnement, domaines de couverture
-- Mise en avant du blog et des derniers articles
-- Liens vers les réseaux sociaux
-- Call-to-action vers le blog
+Introduction page for the media outlet:
+- Presentation of Chronique Boursière: mission, positioning, coverage areas
+- Highlight of the blog and latest articles
+- Links to social media
+- Call-to-action toward the blog
 
-### Page `/link`
+### `/link` Page
 
-Page de liens centralisée (inspiration Linktree) :
-- Logo du média
-- Liste de liens cliquables : réseaux sociaux, articles phares, newsletter, etc.
+Centralized links page (Linktree-inspired):
+- Media logo
+- List of clickable links: social media, featured articles, newsletter, etc.
 
 ---
 
 ## 6. Blog
 
-### Thématiques / Catégories
+### Topics / Categories
 
-| Catégorie | Description |
-|-----------|-------------|
-| Résultats financiers | Publications trimestrielles et annuelles des entreprises |
-| Actualité | Actualité générale économique et corporate |
-| CAC40 | Suivi des entreprises du CAC40 |
-| Politique | Politique économique, décisions gouvernementales |
-| Finance | Marchés financiers, analyse, données |
+| Category | Description |
+|----------|-------------|
+| Financial Results | Quarterly and annual corporate earnings publications |
+| News | General economic and corporate news |
+| CAC40 | Coverage of CAC40 companies |
+| Politics | Economic policy, government decisions |
+| Finance | Financial markets, analysis, data |
 
-### Fonctionnalités
+### Features
 
-- **Pas d'image obligatoire** sur les articles — le texte prime
-- Classification claire par catégorie et tags
-- Calendrier de publications (liste des publications à venir ou programmées)
-- Résultats financiers automatisés (voir section Automatisations)
-- Articles en brouillon par défaut, publication uniquement après validation manuelle
+- **No mandatory image** on articles — text comes first
+- Clear classification by category and tags
+- Publication calendar (list of upcoming or scheduled publications)
+- Automated financial results (see Automations section)
+- Articles in draft by default, published only after manual validation
 
 ---
 
 ## 7. Back-office
 
-Interface d'administration sécurisée (authentification admin par login/mot de passe).
+Secure administration interface (admin login/password authentication).
 
-### Onglet 1 — Recherche de News
+### Tab 1 — News Search
 
-Recherche et collecte automatique d'articles depuis des sources externes.
+Automatic search and collection of articles from external sources.
 
-**Sources :**
-- Flux RSS de journaux économiques et financiers
+**Sources:**
+- RSS feeds from economic and financial newspapers
 - Google News RSS
-- Blogs spécialisés
+- Specialized blogs
 
-**Workflow :**
-1. Le back-office agrège les flux RSS configurés
-2. Un LLM (IA) analyse et transforme le contenu en article Markdown prêt à l'emploi au format Hugo
-3. L'article est créé en **brouillon** (`draft: true`) dans le dépôt
-4. L'admin valide et publie manuellement l'article depuis le back-office
+**Workflow:**
+1. The back-office aggregates configured RSS feeds
+2. An LLM (AI) analyzes and transforms the content into a ready-to-use Hugo Markdown article
+3. The article is created as a **draft** (`draft: true`) in the repository
+4. The admin manually validates and publishes the article from the back-office
 
-### Onglet 2 — Data
+### Tab 2 — Data
 
-Suivi et affichage des résultats financiers trimestriels des entreprises.
+Tracking and display of quarterly financial results for companies.
 
-- Affichage structuré des résultats par entreprise et par trimestre
-- Données importées automatiquement ou saisies manuellement
-- Lien avec les articles de blog correspondants
+- Structured display of results by company and by quarter
+- Data imported automatically or entered manually
+- Linked to corresponding blog articles
 
-### Onglet 3 — Publication
+### Tab 3 — Publication
 
-#### Sous-onglet 3.1 — Articles Blog
-- Gestion des articles : création, édition, validation, publication, dépublication
-- Vue liste avec statut (brouillon / publié)
-- Éditeur Markdown
+#### Sub-tab 3.1 — Blog Articles
+- Article management: creation, editing, validation, publication, unpublication
+- List view with status (draft / published)
+- Markdown editor
 
-#### Sous-onglet 3.2 — Twitter / X
-- Rédaction et programmation de tweets
-- Publication manuelle ou automatisée depuis le back-office
-- Historique des publications
+#### Sub-tab 3.2 — Twitter / X
+- Tweet drafting and scheduling
+- Manual or automated publishing from the back-office
+- Publication history
 
 ---
 
-## 8. Automatisations
+## 8. Automations
 
-| Automatisation | Description |
-|----------------|-------------|
-| Agrégation RSS | Collecte automatique des flux RSS configurés à intervalle régulier |
-| Génération d'articles | LLM parse le contenu RSS et génère un fichier `.md` Hugo formaté |
-| Résultats financiers | Récupération automatique des résultats trimestriels des entreprises |
-| Calendrier de publication | Affichage et gestion du planning de publication des articles |
-| Publication Twitter | Automatisation optionnelle de la publication sur X/Twitter |
+| Automation | Description |
+|------------|-------------|
+| RSS aggregation | Automatic collection of configured RSS feeds at regular intervals |
+| Article generation | LLM parses RSS content and generates a formatted Hugo `.md` file |
+| Financial results | Automatic retrieval of quarterly corporate earnings |
+| Publication calendar | Display and management of article publication schedule |
+| Twitter publishing | Optional automation of publishing on X/Twitter |
 
 ---
 
 ## 9. SEO
 
-### Fichiers techniques
+### Technical Files
 
-- `robots.txt` : présent et correctement configuré
-- `sitemap.xml` : généré automatiquement par Hugo, soumis aux moteurs de recherche
+- `robots.txt`: present and correctly configured
+- `sitemap.xml`: automatically generated by Hugo, submitted to search engines
 
-### Bonnes pratiques
+### Best Practices
 
-- URLs propres et lisibles (`/blog/titre-de-larticle`)
-- Balises `<title>` et `<meta description>` uniques par page
-- Balises Open Graph (partage réseaux sociaux)
-- Balisage structuré (Schema.org) pour les articles (`Article`, `NewsArticle`)
-- Temps de chargement optimisé (site statique Hugo)
+- Clean, readable URLs (`/blog/article-title`)
+- Unique `<title>` and `<meta description>` tags per page
+- Open Graph tags (social media sharing)
+- Structured data markup (Schema.org) for articles (`Article`, `NewsArticle`)
+- Optimized loading time (Hugo static site)
 - Responsive design (mobile-first)
-- Catégorisation et tags cohérents pour le maillage interne
-- Pagination du blog
-- Fil d'Ariane (breadcrumbs) sur les articles
+- Consistent categorization and tags for internal linking
+- Blog pagination
+- Breadcrumbs on articles
